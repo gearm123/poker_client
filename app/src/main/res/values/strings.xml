@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PokerCalc</string>
+    <string name="table_string">Enter money on table</string>
+    <string name="paybox_string">enter money in paybox</string>
+    <string name="title">poker calc</string>
+    <string name="your_string">enter your money in table</string>
+    <string name="ok">submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="stat_title">calculate what is you are owed</string>
+    <string name="your_buy_in">enter how much did you earned/lost today in shekels</string>
+    <string name="name">enter your name</string>
+    <string name="num_play">enter amount of players in table</string>
+</resources>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">מחשבון פוקר</string>
+    <string name="table_string">הכנס כמה כסף בשולחן</string>
+    <string name="paybox_string">הכנס כמה כסף בפייבוקס</string>
+    <string name="title">מחשבון פוקר</string>
+    <string name="your_string">הכנס כמה כסף יש לך בשולחן</string>
+    <string name="ok">אשר</string>
+    <string name="cancel">בטל</string>
+    <string name="stat_title">חשב כמה מגיע לך</string>
+    <string name="your_buy_in">הכנס כמה הרווחת הפסדת היום</string>
+    <string name="name">הכנס את שמך</string>
+    <string name="num_play">הזן מספר שחקנים שנשארו בשולחן</string>
+</resources>
