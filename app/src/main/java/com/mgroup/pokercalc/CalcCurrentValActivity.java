@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,36 +11,51 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class UpdateStatistics extends AppCompatActivity {
+import java.nio.channels.FileLock;
+
+public class CalcCurrentValActivity extends AppCompatActivity {
     private AlertDialog emailDialog;
-    private SharedPreferences mPrefs;
-    SharedPreferences.Editor editor;
-
+    TextView currentValView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_statistics);
-        mPrefs = getSharedPreferences("poker_stat", MODE_PRIVATE);
-        editor = mPrefs.edit();
+        setContentView(R.layout.activity_calc_current_val);
+        currentValView = this.findViewById(R.id.shekel);
         emailDialog = createEmailDialog();
         emailDialog.show();
     }
 
+
+
+
     private AlertDialog createEmailDialog() {
         AlertDialog.Builder builder;
         AlertDialog alertDialog;
-        final EditText edittextEmail;
+        final EditText tableMoney;
+        final EditText payboxMoney;
+        final EditText currentMoney;
         Log.v("poker_calc", "creating dialog");
         builder = new AlertDialog.Builder(this);
 
-        edittextEmail = new EditText(this);
-        edittextEmail.setHint(getString(R.string.your_buy_in));
-        edittextEmail.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        tableMoney = new EditText(this);
+        tableMoney.setHint(getString(R.string.table_string));
+        tableMoney.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+        payboxMoney = new EditText(this);
+        payboxMoney.setHint(getString(R.string.paybox_string));
+        payboxMoney.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+        currentMoney = new EditText(this);
+        currentMoney.setHint(getString(R.string.your_string));
+        currentMoney.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
         LinearLayout lay = new LinearLayout(this);
         lay.setOrientation(LinearLayout.VERTICAL);
-        lay.addView(edittextEmail);
+        lay.addView(tableMoney);
+        lay.addView(payboxMoney);
+        lay.addView(currentMoney);
         builder.setTitle(getString(R.string.stat_title));
 
         builder.setView(lay);
@@ -66,28 +80,18 @@ public class UpdateStatistics extends AppCompatActivity {
 
                     @Override
                     public void onClick(View view) {
-                        float earned;
-                        float oldPrefs;
-                        float newVal;
-                        float percentage;
-                        String buy = edittextEmail.getText().toString();
-                        earned = Float.valueOf(buy);
+                        float table;
+                        float paybox;
+                        float myMoney;
+                        String tables = tableMoney.getText().toString();
+                        String payb = payboxMoney.getText().toString();
+                        String mym = currentMoney.getText().toString();
+                        table = Float.valueOf(tables);
+                        paybox = Float.valueOf(payb);
+                        myMoney = Float.valueOf(mym);
+                        float myShekels =((paybox/table)*myMoney);
+                        currentValView.setText("your currently have "+myShekels+" shekels");
                         emailDialog.dismiss();
-                        oldPrefs = mPrefs.getFloat("poker_total", 0);
-                        Log.v("poker_calc", "old val " + oldPrefs);
-                        newVal = oldPrefs + earned;
-                        Log.v("poker_calc", "new val is  " + newVal);
-                        if (oldPrefs != 0) {
-                            percentage = ((newVal / oldPrefs) * 100) - 100;
-                        }else{
-                            percentage = 0;
-                        }
-                        Log.v("poker_calc", "percentage is + " + percentage);
-                        editor.putFloat("poker_total", newVal);
-                        editor.commit();
-                        editor.putFloat("poker_percentage", percentage);
-                        editor.commit();
-                        finish();
                     }
                 });
             }

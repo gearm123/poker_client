@@ -3,11 +3,17 @@
     <string name="table_string">הכנס כמה כסף בשולחן</string>
     <string name="paybox_string">הכנס כמה כסף בפייבוקס</string>
     <string name="title">מחשבון פוקר</string>
-    <string name="your_string">הכנס כמה כסף יש לך בשולחן</string>
-    <string name="ok">אשר</string>
+    <string name="your_string">הכנס כמה כסף יש לך בשולחן</string>חחח
+    <string name="ok">חשב ערך נוכחי </string>
     <string name="cancel">בטל</string>
     <string name="stat_title">חשב כמה מגיע לך</string>
     <string name="your_buy_in">הכנס כמה הרווחת הפסדת היום</string>
     <string name="name">הכנס את שמך</string>
     <string name="num_play">הזן מספר שחקנים שנשארו בשולחן</string>
+    <string name="update_stat">לעדכון סטטיסטיקה</string>
+    <string name="end_game">מחשבון סוף משחק</string>
+    <string name="view_stat">צפה בסטטיסטיקה שלי</string>
+    <string name="are_you_sure">האם אתה בטוח ?</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
 </resources>
