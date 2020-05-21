@@ -47,7 +47,7 @@ public class UpdateStatistics extends AppCompatActivity {
         builder.setView(lay);
         builder.setCancelable(false);
 
-        builder.setPositiveButton(getString(R.string.ok), null);
+        builder.setPositiveButton(getString(R.string.update_stat), null);
 
         builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
