@@ -13,6 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Set;
+
 public class UpdateStatistics extends AppCompatActivity {
     private AlertDialog emailDialog;
     private SharedPreferences mPrefs;
@@ -79,7 +84,7 @@ public class UpdateStatistics extends AppCompatActivity {
                         Log.v("poker_calc", "new val is  " + newVal);
                         if (oldPrefs != 0) {
                             percentage = ((newVal / oldPrefs) * 100) - 100;
-                        }else{
+                        } else {
                             percentage = 0;
                         }
                         Log.v("poker_calc", "percentage is + " + percentage);
@@ -87,12 +92,44 @@ public class UpdateStatistics extends AppCompatActivity {
                         editor.commit();
                         editor.putFloat("poker_percentage", percentage);
                         editor.commit();
+                        updateGraph(String.valueOf(newVal));
                         finish();
                     }
                 });
             }
         });
 
+
         return alertDialog;
+    }
+
+    public void updateGraph(String val) {
+        Gson gson = new Gson();
+        String jsonText = mPrefs.getString("graph_vals", null);
+        ArrayList<String> graphVals = gson.fromJson(jsonText, ArrayList.class);
+        if (graphVals != null) {
+            if(graphVals.size() <8) {
+                graphVals.add(val);
+                String jsonTextSend = gson.toJson(graphVals);
+                editor.putString("graph_vals", jsonTextSend);
+                editor.commit();
+            }else{
+                for(int i = 0 ; i < 7 ; i++) {
+                    graphVals.set(i, graphVals.get(i+1));
+                }
+                graphVals.set(7, val);
+                String jsonTextSend = gson.toJson(graphVals);
+                editor.putString("graph_vals", jsonTextSend);
+                editor.commit();
+            }
+        } else {
+            graphVals = new ArrayList<>();
+            graphVals.add(val);
+            String jsonTextSendElse = gson.toJson(graphVals);
+            editor.putString("graph_vals", jsonTextSendElse);
+            editor.commit();
+        }
+
+
     }
 }

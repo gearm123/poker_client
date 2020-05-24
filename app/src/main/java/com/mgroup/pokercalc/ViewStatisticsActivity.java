@@ -10,6 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.ArrayList;
+
 public class ViewStatisticsActivity extends AppCompatActivity implements View.OnClickListener {
     private SharedPreferences mPrefs;
     SharedPreferences.Editor editor;
@@ -18,6 +25,7 @@ public class ViewStatisticsActivity extends AppCompatActivity implements View.On
     TextView balance;
     TextView precent;
     Button clearButton;
+    GraphView graph;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +33,41 @@ public class ViewStatisticsActivity extends AppCompatActivity implements View.On
         balance = this.findViewById(R.id.tbalance);
         precent = this.findViewById(R.id.percen);
         clearButton = this.findViewById(R.id.clear);
+        graph = this.findViewById(R.id.graph);
         clearButton.setOnClickListener(this);
         mPrefs = getSharedPreferences("poker_stat", MODE_PRIVATE);
         editor = mPrefs.edit();
         getVals();
         updateVIews();
+        setUpGraph();
+        showGraph();
     }
+
+    public void setUpGraph(){
+        graph.getGridLabelRenderer().setVerticalAxisTitle("total balance");
+        graph.getGridLabelRenderer().setHorizontalAxisTitle("game num");
+    }
+
+    public void showGraph() {
+        Gson gson = new Gson();
+        String jsonText = mPrefs.getString("graph_vals", null);
+        ArrayList<String> graphVals = gson.fromJson(jsonText, ArrayList.class);
+        if (graphVals != null) {
+            int size = graphVals.size();
+            DataPoint[] dataPoints = new DataPoint[8]; // declare an array of DataPoint objects with the same size as your list
+            for (int i = 0; i < size; i++) {
+                dataPoints[i] = new DataPoint(i, Float.valueOf(graphVals.get(i)));//new DataPoint(i+1, Float.valueOf(graphVals.get(i))); // not sure but I think the second argument should be of type double
+            }
+
+            for (int j = size; j < 8; j++) {
+                dataPoints[j] = new DataPoint(j, 0);
+            }
+
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
+            graph.addSeries(series);
+        }
+    }
+
 
     public void getVals(){
 

@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CalcCurrentValActivity"></activity>
-        <activity android:name=".ViewStatisticsActivity" />
-        <activity android:name=".EndGameCalcActivity" />
-        <activity android:name=".UpdateStatistics" />
+        <activity android:name=".CalcCurrentValActivity" android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".ViewStatisticsActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".EndGameCalcActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".UpdateStatistics" android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

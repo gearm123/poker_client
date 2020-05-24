@@ -7,7 +7,7 @@
     <string name="ok">calculate my money</string>
     <string name="cancel">Cancel</string>
     <string name="stat_title">calculate what is you are owed</string>
-    <string name="your_buy_in">how much did you earned/lost today</string>
+    <string name="your_buy_in">how much did you earn/lose today</string>
     <string name="name">enter your name</string>
     <string name="num_play">enter amount of players in table</string>
     <string name="update_stat">update my stats</string>

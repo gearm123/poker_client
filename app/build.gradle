@@ -28,4 +28,8 @@ dependencies {
     implementation 'info.guardianproject.netcipher:netcipher:2.0.0-alpha1'
     implementation 'org.apache.httpcomponents:httpcore:4.4.1'
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+    implementation 'com.jjoe64:graphview:4.2.2'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+
 }
